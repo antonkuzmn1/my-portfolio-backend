@@ -1,0 +1,10 @@
+### findAll
+GET localhost:3000/visits
+
+### createVisit
+POST localhost:3000/visits
+Content-Type: application/json
+
+{
+  "action": "Leave"
+}
