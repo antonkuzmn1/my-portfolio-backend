@@ -11,11 +11,11 @@ export class VisitService {
   ) {}
 
   async findAll(): Promise<Visit[]> {
-    // return this.visitRepository.find();
-    return [];
+    return this.visitRepository.find();
+    // return [];
   }
 
-  async createVisit(ip: string, action: VisitActions): Promise<Visit> {
-    return this.visitRepository.save({ip, action});
+  async createVisit(ipAddress: string, action: VisitActions): Promise<Visit> {
+    return this.visitRepository.save({ipAddress, action});
   }
 }

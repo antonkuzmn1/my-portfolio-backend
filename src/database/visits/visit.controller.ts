@@ -16,9 +16,9 @@ export class VisitController {
 
   @Post()
   async createVisit(
-    @Ip() ip: string,
+    @Ip() ipAddress: string,
     @Body('action') action: VisitActions
   ): Promise<Visit> {
-    return this.visitService.createVisit(ip, action);
+    return this.visitService.createVisit(ipAddress, action);
   }
 }

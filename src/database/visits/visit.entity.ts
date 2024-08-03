@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, Check } from 'typeorm';
-import { IsIP } from 'class-validator';
 
 // noinspection JSUnusedGlobalSymbols
 export enum VisitActions {
@@ -19,7 +18,6 @@ export class Visit {
   datetime: Date;
 
   @Column()
-  @IsIP()
   ipAddress: string;
 
   @Column({ type: 'enum', enum: VisitActions })
