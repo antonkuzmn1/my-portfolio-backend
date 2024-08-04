@@ -19,6 +19,10 @@ describe('Telegram Service', () => {
     service = moduleFixture.get<TelegramService>(TelegramService);
   });
 
+  afterAll(async () => {
+    await app.close();
+  });
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
