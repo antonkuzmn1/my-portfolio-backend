@@ -2,23 +2,23 @@ import { Injectable } from '@nestjs/common';
 import fetch from 'node-fetch';
 
 export interface IpApiResponse {
-  ipVersion: number,
-  ipAddress: string,
-  latitude: number,
-  longitude: number,
-  countryName: string,
-  countryCode: string,
-  timeZone: string,
-  zipCode: string,
-  cityName: string,
-  regionName: string,
-  isProxy: boolean,
-  continent: string,
-  continentCode: string,
-  currency: { code: string, name: string },
-  language: string,
-  timeZones: string[],
-  tlds: string[]
+  ipVersion: number, // 4
+  ipAddress: string, // "185.255.178.34"
+  latitude: number, // 59.436958
+  longitude: number, // 24.753531
+  countryName: string, // "Estonia"
+  countryCode: string, // "EE"
+  timeZone: string, // "+03:00"
+  zipCode: string, // "10153"
+  cityName: string, // "Tallinn"
+  regionName: string, // "Harjumaa"
+  isProxy: boolean, // false
+  continent: string, // "Europe"
+  continentCode: string, // "EU"
+  currency: { code: string, name: string }, // { "code": "EUR", "name": "Euro" }
+  language: string, // "Estonian"
+  timeZones: string[], // ["Europe/Tallinn"]
+  tlds: string[], // [".ee"]
 }
 
 @Injectable()

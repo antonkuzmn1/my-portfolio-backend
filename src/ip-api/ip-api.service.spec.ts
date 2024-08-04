@@ -28,7 +28,7 @@ describe('IP API Service', () => {
   })
 
   it('should get a data', async () => {
-    const ip = '8.8.8.8';
+    const ip: string = '8.8.8.8';
     const answer: IpApiResponse = {
       ipVersion: 4,
       ipAddress: '8.8.8.8',
@@ -78,7 +78,7 @@ describe('IP API Service', () => {
       ],
       tlds: [ '.us' ]
     }
-    const data = await service.get(ip);
+    const data: IpApiResponse = await service.get(ip);
     expect(data).toEqual(answer);
   });
-})
+});
