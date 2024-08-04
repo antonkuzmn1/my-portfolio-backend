@@ -1,10 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import fetch from 'node-fetch';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TelegramService {
-  private readonly token: string = '6741053552:AAHN6w8mXXK8Hwt11CvS-gLpbadq77bC-NY';
-  private readonly chatId: string = '524053480';
+  private readonly token: string;
+  private readonly chatId: string;
+
+  constructor(
+    private configService: ConfigService,
+  ) {
+    this.token = this.configService.get<string>('TELEGRAM_TOKEN');
+    this.chatId = this.configService.get<string>('TELEGRAM_ID');
+  }
 
   async sendMessage(message: string): Promise<void> {
     const url = `https://api.telegram.org/bot${this.token}/sendMessage`;
