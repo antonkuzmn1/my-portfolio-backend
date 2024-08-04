@@ -4,6 +4,7 @@ import { Visit } from './database/visits/visit.entity';
 import { VisitService } from './database/visits/visit.service';
 import { VisitController } from './database/visits/visit.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TelegramService } from './telegram/telegram.service';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     TypeOrmModule.forFeature([Visit]),
   ],
   controllers: [VisitController],
-  providers: [VisitService],
+  providers: [VisitService, TelegramService],
 })
 export class AppModule {
 }
