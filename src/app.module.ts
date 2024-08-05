@@ -7,6 +7,7 @@ import { TelegramService } from './telegram/telegram.service';
 import { IpApiService } from './ip-api/ip-api.service';
 import { databaseOptions } from './database/database-options';
 import { Visit } from './database/visits/visit.entity';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -14,8 +15,15 @@ import { Visit } from './database/visits/visit.entity';
     TypeOrmModule.forRootAsync(databaseOptions),
     TypeOrmModule.forFeature([Visit]),
   ],
-  controllers: [VisitController],
-  providers: [VisitService, TelegramService, IpApiService],
+  controllers: [
+    AppController,
+    VisitController,
+  ],
+  providers: [
+    VisitService,
+    TelegramService,
+    IpApiService,
+  ],
 })
 export class AppModule {
 }
