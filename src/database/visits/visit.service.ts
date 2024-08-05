@@ -33,7 +33,7 @@ export class VisitService {
     return [];
   }
 
-  async createVisit(headers: any, action: VisitActions): Promise<Visit> {
+  async createVisit(headers: any, action: VisitActions, key: string): Promise<Visit> {
     const ipAddress: string | undefined = this.tryGetIp(headers);
 
     const newVisit: Visit = await this.visitRepository.save({ ipAddress, action });
@@ -41,9 +41,9 @@ export class VisitService {
     const selectedJson = ipAddress ? visitData : headers;
     const json: string = JSON.stringify(selectedJson, null, 2);
     const alert: string = ipAddress
-      ? `Country: ${visitData.country}\nRegion: ${visitData.region}\nCity: ${visitData.city}\n`
-      : '❗Undefined IP address❗\n';
-    const telegramMessage: string = `#${newVisit.id}\n${alert}\`\`\`json\n${json}\`\`\``;
+      ? `Country: ${visitData.country}\nRegion: ${visitData.region}\nCity: ${visitData.city}`
+      : '❗Undefined IP address❗';
+    const telegramMessage: string = `#${newVisit.id}\n${alert}\nKey: ${key}\n\`\`\`json\n${json}\`\`\``;
 
     await this.telegramService.sendMessage(telegramMessage);
 

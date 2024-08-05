@@ -17,8 +17,9 @@ export class VisitController {
   @Post()
   async createVisit(
     @Headers() headers: any,
-    @Body('action') action: VisitActions
+    @Body('action') action: VisitActions,
+    @Body('key') key: string,
   ): Promise<Visit> {
-    return this.visitService.createVisit(headers, action);
+    return this.visitService.createVisit(headers, action, key);
   }
 }

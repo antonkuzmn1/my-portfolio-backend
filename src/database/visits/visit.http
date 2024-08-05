@@ -6,5 +6,6 @@ POST localhost:3000/visits
 Content-Type: application/json
 
 {
-  "action": "Leave"
+  "action": "Leave",
+  "key": "Test"
 }
