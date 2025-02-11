@@ -11,10 +11,4 @@ COPY . .
 
 RUN npm run build
 
-RUN ls -l
-
-RUN ls -l /app
-
-RUN ls -l /app/dist
-
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start"]
