@@ -29,6 +29,10 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/my-portfolio-backend:latest
 
+      - name: Create directory on server
+        run: |
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p ~/my-portfolio-backend"
+
       - name: Copy docker-compose.yml to server
         run: |
           scp docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/my-portfolio-backend/
