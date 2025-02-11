@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -13,6 +13,10 @@ RUN npm run build
 
 RUN ls -s
 
-EXPOSE 3000
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+
+COPY --from=builder /app /app
 
 CMD ["npm", "run", "start:prod"]
