@@ -5,10 +5,10 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm install --production
+RUN npm install -g @nestjs/cli
 
 COPY . .
 
-RUN npm install -g @nestjs/cli
 
 RUN npm run build
 
