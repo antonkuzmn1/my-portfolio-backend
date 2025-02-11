@@ -8,4 +8,6 @@ export class AppController {
   getHello(@Res() res: Response) {
     res.sendFile(join(__dirname, 'public', 'index.html'));
   }
+
+  // test1
 }
