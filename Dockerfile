@@ -7,10 +7,12 @@ COPY package*.json ./
 RUN npm install --production
 RUN npm install -g @nestjs/cli
 
-COPY . /app/
+COPY . .
 
 RUN npm run build
 
+RUN ls -s
+
 EXPOSE 3000
 
-CMD ["node", "dist/main"]
+CMD ["npm", "run", "start:prod"]
