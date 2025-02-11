@@ -15,4 +15,4 @@ export const databaseOptions: TypeOrmModuleAsyncOptions = {
     synchronize: true,
   }),
   inject: [ConfigService],
-}
+};

@@ -4,10 +4,7 @@ import { Visit, VisitActions } from './visit.entity';
 
 @Controller('visits')
 export class VisitController {
-  constructor(
-    private readonly visitService: VisitService,
-  ) {
-  }
+  constructor(private readonly visitService: VisitService) {}
 
   @Get()
   async findAll(): Promise<Visit[]> {

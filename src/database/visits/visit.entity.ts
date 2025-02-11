@@ -22,5 +22,4 @@ export class Visit {
 
   @Column({ type: 'enum', enum: VisitActions })
   action: VisitActions;
-
 }

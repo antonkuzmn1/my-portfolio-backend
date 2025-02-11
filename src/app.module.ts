@@ -15,15 +15,7 @@ import { AppController } from './app.controller';
     TypeOrmModule.forRootAsync(databaseOptions),
     TypeOrmModule.forFeature([Visit]),
   ],
-  controllers: [
-    AppController,
-    VisitController,
-  ],
-  providers: [
-    VisitService,
-    TelegramService,
-    IpApiService,
-  ],
+  controllers: [AppController, VisitController],
+  providers: [VisitService, TelegramService, IpApiService],
 })
-export class AppModule {
-}
+export class AppModule {}

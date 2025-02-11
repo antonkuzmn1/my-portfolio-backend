@@ -6,16 +6,16 @@ import { IpApiResponse, IpApiService } from '../../ip-api/ip-api.service';
 import { TelegramService } from '../../telegram/telegram.service';
 
 export interface VisitData {
-  host: string, // "api.antonkuzm.in"
-  'x-real-ip': string, // "185.255.178.34"
-  'sec-ch-ua-platform': string, // "\"macOS\""
-  'user-agent': string, // "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
-  origin: string, // 'https://antonkuzm.in'
-  referer: string, // 'https://antonkuzm.in/'
-  'accept-language': string, // 'en-US,en;q=0.9,ru;q=0.8'
-  country: string, // 'Estonia'
-  region: string, // 'Harjumaa'
-  city: string, // 'Tallinn'
+  host: string; // "api.antonkuzm.in"
+  'x-real-ip': string; // "185.255.178.34"
+  'sec-ch-ua-platform': string; // "\"macOS\""
+  'user-agent': string; // "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+  origin: string; // 'https://antonkuzm.in'
+  referer: string; // 'https://antonkuzm.in/'
+  'accept-language': string; // 'en-US,en;q=0.9,ru;q=0.8'
+  country: string; // 'Estonia'
+  region: string; // 'Harjumaa'
+  city: string; // 'Tallinn'
 }
 
 @Injectable()
@@ -25,19 +25,34 @@ export class VisitService {
     private visitRepository: VisitRepository,
     private ipApiService: IpApiService,
     private telegramService: TelegramService,
-  ) {
-  }
+  ) {}
 
   async findAll(): Promise<Visit[]> {
     // return this.visitRepository.find();
     return [];
   }
 
-  async createVisit(headers: any, action: VisitActions, key: string): Promise<Visit> {
+  async createVisit(
+    headers: any,
+    action: VisitActions,
+    key: string = '',
+  ): Promise<Visit> {
+    const userAgent: string = headers['user-agent'] || '';
+    const isBot = /bot|crawler|spider|robot/i.test(userAgent);
+
+    if (isBot) {
+      return null;
+    }
+
     const ipAddress: string | undefined = this.tryGetIp(headers);
 
-    const newVisit: Visit = await this.visitRepository.save({ ipAddress, action });
-    const visitData: VisitData = ipAddress ? await this.getVisitDataByHeaders(headers) : undefined;
+    const newVisit: Visit = await this.visitRepository.save({
+      ipAddress,
+      action,
+    });
+    const visitData: VisitData = ipAddress
+      ? await this.getVisitDataByHeaders(headers)
+      : undefined;
     const selectedJson = ipAddress ? visitData : headers;
     const json: string = JSON.stringify(selectedJson, null, 2);
     const alert: string = ipAddress
@@ -59,16 +74,20 @@ export class VisitService {
     return {
       host: headers.host ? headers.host : undefined,
       'x-real-ip': ip,
-      'sec-ch-ua-platform': headers['sec-ch-ua-platform'] ? headers['sec-ch-ua-platform'] : undefined,
+      'sec-ch-ua-platform': headers['sec-ch-ua-platform']
+        ? headers['sec-ch-ua-platform']
+        : undefined,
       'user-agent': headers['user-agent'] ? headers['user-agent'] : undefined,
       origin: headers.origin ? headers.origin : undefined,
       referer: headers.referer ? headers.referer : undefined,
-      'accept-language': headers['accept-language'] ? headers['accept-language'] : undefined,
+      'accept-language': headers['accept-language']
+        ? headers['accept-language']
+        : undefined,
       country: ipApiResponse.countryName,
       region: ipApiResponse.regionName,
       city: ipApiResponse.cityName,
     };
-  };
+  }
 
   tryGetIp = (headers: any): string | undefined => {
     try {

@@ -7,9 +7,7 @@ export class TelegramService {
   private readonly token: string;
   private readonly chatId: string;
 
-  constructor(
-    private configService: ConfigService,
-  ) {
+  constructor(private configService: ConfigService) {
     this.token = this.configService.get<string>('TELEGRAM_TOKEN');
     this.chatId = this.configService.get<string>('TELEGRAM_ID');
   }

@@ -25,7 +25,7 @@ describe('IP API Service', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-  })
+  });
 
   it('should get a data', async () => {
     const ip: string = '8.8.8.8';
@@ -74,10 +74,10 @@ describe('IP API Service', () => {
         'America/Phoenix',
         'America/Sitka',
         'America/Yakutat',
-        'Pacific/Honolulu'
+        'Pacific/Honolulu',
       ],
-      tlds: [ '.us' ]
-    }
+      tlds: ['.us'],
+    };
     const data: IpApiResponse = await service.get(ip);
     expect(data).toEqual(answer);
   });
