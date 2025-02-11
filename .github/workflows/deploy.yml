@@ -31,7 +31,7 @@ jobs:
 
       - name: Copy docker-compose.yml to server
         run: |
-          scp docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/root/my-portfolio-backend/
+          scp docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/my-portfolio-backend/
 
       - name: SSH to remote server and deploy
         uses: appleboy/ssh-action@v0.1.5
