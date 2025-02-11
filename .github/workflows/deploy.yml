@@ -29,11 +29,22 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/my-portfolio-backend:latest
 
-      - name: Deploy to Server
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
-            docker pull ${{ secrets.DOCKER_USERNAME }}/my-portfolio-backend:latest
-            docker stop my-portfolio-backend || true
-            docker rm my-portfolio-backend || true
-            docker run -d --name my-portfolio-backend -p 3002:3000 ${{ secrets.DOCKER_USERNAME }}/my-portfolio-backend:latest
-          EOF
+#      - name: Deploy to Server
+#        run: |
+#          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
+#            docker pull ${{ secrets.DOCKER_USERNAME }}/my-portfolio-backend:latest
+#            docker stop my-portfolio-backend || true
+#            docker rm my-portfolio-backend || true
+#            docker run -d --name my-portfolio-backend -p 3002:3000 ${{ secrets.DOCKER_USERNAME }}/my-portfolio-backend:latest
+#          EOF
+      - name: SSH to remote server and deploy
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /root/my-portfolio-backend/
+            docker pull antonkuzmn1/my-portfolio-backend
+            docker-compose down
+            docker-compose up -d
