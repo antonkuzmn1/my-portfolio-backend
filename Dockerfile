@@ -19,4 +19,8 @@ WORKDIR /app
 
 COPY --from=builder /app /app
 
+RUN ls -l /app
+
+RUN ls -l /app/dist
+
 CMD ["npm", "run", "start:prod"]
