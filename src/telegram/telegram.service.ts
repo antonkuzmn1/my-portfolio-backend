@@ -13,6 +13,8 @@ export class TelegramService {
   }
 
   async sendMessage(message: string): Promise<void> {
+    console.log('token:', this.token);
+    console.log('chatId:', this.chatId);
     const url = `https://api.telegram.org/bot${this.token}/sendMessage`;
     const response = await fetch(url, {
       method: 'POST',
