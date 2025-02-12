@@ -9,5 +9,4 @@ export class AppController {
     res.sendFile(join(__dirname, 'public', 'index.html'));
   }
 
-  // test2
 }
