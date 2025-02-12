@@ -1,12 +1,13 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
+  nest-app:
     image: antonkuzmn1/my-portfolio-backend
     container_name: my-portfolio-backend
+    build: .
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       - NODE_ENV=production
-    restart: no
+    restart: always
+    command: ['npm', 'start:prod']
