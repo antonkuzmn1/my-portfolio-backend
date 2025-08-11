@@ -5,8 +5,8 @@ services:
     image: antonkuzmn1/my-portfolio-backend
     container_name: my-portfolio-backend
     build: .
-    ports:
-      - "3001:3000"
+    #ports:
+    #  - "3001:3000"
     environment:
       - NODE_ENV=production
     restart: always
