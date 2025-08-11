@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  scire:
+    external: true
+
 services:
   nest-app:
     image: antonkuzmn1/my-portfolio-backend
@@ -11,3 +15,5 @@ services:
       - NODE_ENV=production
     restart: always
     command: ['npm', 'start']
+    networks:
+      - scire
